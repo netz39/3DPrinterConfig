@@ -1,0 +1,8 @@
+M104 S0 ;Hotend aus
+M140 S0 ;Heizbett aus
+G1 E1 F300 ;1mm Filament ex.
+G91 ;auf relative position schalten
+G0 F1500 Z10 ;Z Achse 10mm erhöhen
+G90 ;absolute position
+G0 F1500 X100 Y210 ;X auf 100 und Y auf 220
+M84 ;Stepper deaktivieren
