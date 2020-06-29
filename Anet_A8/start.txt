@@ -1,0 +1,8 @@
+G28 ; home all axes
+G29
+G1 X0 Y20 Z1 F3000 ; get ready to prime
+G92 E0 ; reset extrusion distance
+G1 X200 E20 F600 ; prime nozzle
+G92 E0
+G1 E-2.5000 F1800
+G1 Z0.180 F1002
