@@ -1,0 +1,231 @@
+[mcu]
+serial: /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0
+baud: 250000
+restart_method: cheetah
+
+[printer]
+kinematics: delta
+max_velocity: 300
+max_accel: 3000
+max_z_velocity: 150
+#delta_radius: 134.4
+
+[stepper_a]
+step_pin: PB8
+dir_pin: PB9
+enable_pin: !PA8
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PA1
+homing_speed: 50
+#position_endstop: 296
+#arm_length: 267.0
+#angle: 210
+
+[stepper_b]
+step_pin: PB2
+dir_pin: PB3
+enable_pin: !PB1
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PB4
+#angle: 330
+
+[stepper_c]
+step_pin: PC0
+dir_pin: PC1
+enable_pin: !PC2
+microsteps: 16
+rotation_distance: 40
+endstop_pin: ^PA15
+#angle: 90
+
+[tmc2208 stepper_a]
+uart_pin: PA12
+tx_pin: PA11
+run_current: 0.800
+stealthchop_threshold: 999999
+
+[tmc2208 stepper_b]
+uart_pin: PB7
+tx_pin: PB6
+run_current: 0.800
+stealthchop_threshold: 999999
+
+[tmc2208 stepper_c]
+uart_pin: PB11
+tx_pin: PB10
+run_current: 0.800
+stealthchop_threshold: 999999
+
+[tmc2208 extruder]
+uart_pin: PA3
+tx_pin: PA2
+run_current: 1.0
+stealthchop_threshold: 999999
+
+[extruder]
+step_pin: PC15
+dir_pin: PC14
+enable_pin: !PC13
+microsteps: 16
+rotation_distance: 33.33333333333333
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+heater_pin: PC6
+sensor_type: ATC Semitec 104GT-2
+sensor_pin: PC4
+#control: pid
+#pid_Kp: 22.2
+#pid_Ki: 1.08
+#pid_Kd: 114
+min_temp: 0
+max_temp: 250
+max_extrude_cross_section: 0.8
+
+[heater_bed]
+heater_pin: PC7
+sensor_type: ATC Semitec 104GT-2
+sensor_pin: PC5
+control: watermark
+min_temp: 0
+max_temp: 130
+
+[fan]
+pin: PC8
+
+[heater_fan nozzle_cooling_fan]
+pin: PB0
+
+[probe]
+pin: PA0
+x_offset: -27.496
+y_offset: 15.875
+#z_offset: 0  # set this to your Live Z Offset, but negated (invert the sign)
+speed: 6.0
+
+[delta_calibrate]
+radius: 70
+#   Radius (in mm) of the area that may be probed. This is the radius
+#   of nozzle coordinates to be probed; if using an automatic probe
+#   with an XY offset then choose a radius small enough so that the
+#   probe always fits over the bed. This parameter must be provided.
+#speed: 50
+#   The speed (in mm/s) of non-probing moves during the calibration.
+#   The default is 50.
+#horizontal_move_z: 5
+#   The height (in mm) that the head should be commanded to move to
+#   just prior to starting a probe operation. The default is 5.
+
+
+[bed_mesh]
+speed: 100
+horizontal_move_z: 5
+mesh_origin: 0,0
+mesh_radius: 70
+round_probe_count: 5
+
+[display]
+lcd_type: hd44780
+rs_pin: PB14
+e_pin: PC11
+d4_pin: PC10
+d5_pin: PB13
+d6_pin: PB12
+d7_pin: PB15
+hd44780_protocol_init: True
+line_length: 20
+encoder_pins: ^PA5, ^PA7
+click_pin: ^!PC12
+kill_pin: ^!PA4
+
+[output_pin BEEPER_Pin]
+pin: PC9
+[gcode_macro M300]
+gcode:  
+    {% set P = params.P|default(100)|int %} ; P sets the tone duration
+    SET_PIN PIN=BEEPER_Pin VALUE=1 ;Play tone
+    G4 P{P} ;tone duration
+    SET_PIN PIN=BEEPER_Pin VALUE=0
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [extruder]
+#*# control = pid
+#*# pid_kp = 24.812
+#*# pid_ki = 1.464
+#*# pid_kd = 105.143
+#*#
+#*# [probe]
+#*# z_offset = 0.996
+#*#
+#*# [printer]
+#*# delta_radius = 133.794071
+#*#
+#*# [stepper_a]
+#*# angle = 209.439635
+#*# arm_length = 269.681349
+#*# position_endstop = 293.302497
+#*#
+#*# [stepper_b]
+#*# angle = 329.739286
+#*# arm_length = 270.267785
+#*# position_endstop = 292.802172
+#*#
+#*# [stepper_c]
+#*# angle = 90.000000
+#*# arm_length = 268.870592
+#*# position_endstop = 294.078724
+#*#
+#*# [delta_calibrate]
+#*# height0 = 0.0
+#*# height0_pos = 23480.000,23480.000,23480.000
+#*# height1 = 0.0
+#*# height1_pos = 26003.000,26003.000,21319.000
+#*# height2 = 0.0
+#*# height2_pos = 22740.000,27578.000,22740.000
+#*# height3 = 0.0
+#*# height3_pos = 21442.000,25610.000,25610.000
+#*# height4 = 0.0
+#*# height4_pos = 22760.000,22760.000,26405.000
+#*# height5 = 0.0
+#*# height5_pos = 25268.000,21606.000,25268.000
+#*# height6 = 0.0
+#*# height6_pos = 26978.000,22750.000,22750.000
+#*# distance0 = 65.5
+#*# distance0_pos1 = 23265.169,23558.774,23626.062
+#*# distance0_pos2 = 21239.330,26066.581,26137.128
+#*# distance1 = 65.4
+#*# distance1_pos1 = 23368.214,23351.731,23730.462
+#*# distance1_pos2 = 22724.608,22700.154,28122.929
+#*# distance2 = 65.3
+#*# distance2_pos1 = 23575.263,23249.258,23626.062
+#*# distance2_pos2 = 26092.838,21223.415,26137.128
+#*# distance3 = 65.6
+#*# distance3_pos1 = 23679.278,23352.113,23419.017
+#*# distance3_pos2 = 28071.735,22705.851,22770.096
+#*# distance4 = 65.45
+#*# distance4_pos1 = 23574.492,23559.160,23316.353
+#*# distance4_pos2 = 26079.045,26073.485,21290.508
+#*# distance5 = 65.5
+#*# distance5_pos1 = 23367.451,23663.368,23419.017
+#*# distance5_pos2 = 22713.225,28055.832,22770.096
+#*# distance6 = 65.35
+#*# distance6_pos1 = 21381.959,25537.464,25961.480
+#*# distance6_pos2 = 22875.619,22552.860,27919.389
+#*# distance7 = 65.55
+#*# distance7_pos1 = 22877.578,22555.337,27520.869
+#*# distance7_pos2 = 26154.211,21270.906,25839.939
+#*# distance8 = 65.4
+#*# distance8_pos1 = 25916.231,21365.872,25607.684
+#*# distance8_pos2 = 27867.693,22856.840,22622.598
+#*# distance9 = 65.3
+#*# distance9_pos1 = 27469.188,22858.985,22624.892
+#*# distance9_pos2 = 25781.982,26135.068,21337.828
+#*# distance10 = 65.45
+#*# distance10_pos1 = 25550.255,25897.357,21432.793
+#*# distance10_pos2 = 22566.136,27852.040,22921.063
+#*# distance11 = 65.4
+#*# distance11_pos1 = 22568.795,27453.528,22923.393
+#*# distance11_pos2 = 21286.993,25769.455,26198.923
